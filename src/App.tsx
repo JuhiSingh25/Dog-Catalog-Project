@@ -1,26 +1,23 @@
+// App.tsx
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import BreedsCatalog from './BreedsCatalog';
+import BreedDetails from './BreedDetails';
+import CompareBreeds from './CompareBreeds';
+import { DogContextProvider } from './DogContext';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <DogContextProvider>
+        <Switch>
+          <Route path="/" exact component={BreedsCatalog} />
+          <Route path="/breeds/:breedId" component={BreedDetails} />
+          <Route path="/compare" component={CompareBreeds} />
+        </Switch>
+      </DogContextProvider>
+    </Router>
   );
-}
+};
 
 export default App;
